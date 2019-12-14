@@ -1,0 +1,54 @@
+<RCC>
+    <qresource prefix="/QML">
+        <file>Qml/main.qml</file>
+        <file>Qml/StartSection/StartSection.qml</file>
+        <file>Qml/StartSection/StartTextInput/StartTextInput.qml</file>
+        <file>Qml/StartSection/StartTextInput/StartTextInputEmail.qml</file>
+        <file>Qml/StartSection/StartTextInput/StartTextInputPassword.qml</file>
+        <file>Qml/StartSection/StartButtonNoBackground.qml</file>
+        <file>Qml/StartSection/StartButtonLoginRegister.qml</file>
+        <file>Qml/StartSection/AreaLogin/AreaLogin.qml</file>
+        <file>Qml/StartSection/AreaRegister/AreaRegister.qml</file>
+        <file>Qml/StartSection/ErrorHandler.qml</file>
+        <file>Qml/MessageSection/MessageSection.qml</file>
+        <file>Qml/MessageSection/AreaChat/AreaChat.qml</file>
+        <file>Qml/MessageSection/ChatImage.qml</file>
+        <file>Qml/MessageSection/ChatListSection/ChatListSection.qml</file>
+        <file>Qml/MessageSection/ChatListSection/AreaChatList/AreaChatList.qml</file>
+        <file>Qml/MessageSection/ChatListSection/AreaChatList/ChatButton.qml</file>
+        <file>Qml/MessageSection/ChatListSection/AreaSearch/AreaSearch.qml</file>
+        <file>Qml/MessageSection/ChatListSection/SearchBar.qml</file>
+        <file>Qml/MessageSection/ChatListSection/ListElements.qml</file>
+        <file>Qml/MessageSection/AreaChat/ChatInfoBar.qml</file>
+        <file>Qml/MessageSection/AreaChat/MessageBar.qml</file>
+        <file>Qml/IconButton.qml</file>
+        <file>Qml/StartSection/AdvertisePanel/AdvertisePanel.qml</file>
+    </qresource>
+    <qresource prefix="/Assets">
+        <file>Assets/Images/Eye_ShowPassword.svg</file>
+        <file>Assets/Images/Padlock.svg</file>
+        <file>Assets/Images/User.svg</file>
+        <file>Assets/Images/Flags/Flag_uk.svg</file>
+        <file>Assets/Images/Flags/Flag_it.svg</file>
+        <file>Assets/Images/test.jpg</file>
+        <file>Assets/Images/Chat/Unselect_Chat.svg</file>
+        <file>Assets/Images/Chat/Menu.svg</file>
+        <file>Assets/Images/Chat/Attachments.svg</file>
+        <file>Assets/Images/Chat/Send Message.svg</file>
+        <file>Assets/Images/Chat/Menu Dots.svg</file>
+        <file>Assets/Images/StartSection/GitHub.png</file>
+        <file>Assets/Images/StartSection/Reddit.png</file>
+        <file>Assets/Images/StartSection/Twitter.png</file>
+        <file>Assets/Images/StartSection/Right Image Advertise Panel.svg</file>
+    </qresource>
+    <qresource prefix="/Languages">
+        <file>Languages/lang_it.ts</file>
+        <file>Languages/lang_it.qm</file>
+    </qresource>
+    <qresource prefix="/CONFIG">
+        <file>Config/config.json</file>
+    </qresource>
+    <qresource prefix="/DATABASE">
+        <file>Database/defaultTables.txt</file>
+    </qresource>
+</RCC>

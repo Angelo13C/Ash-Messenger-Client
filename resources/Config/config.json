@@ -1,0 +1,14 @@
+
+{
+    "networking":
+    {
+        "server_address" : "localhost",
+        "server_port" : "4000",
+
+        "ms_reconnect_socket" : "1000"
+    },
+    "database":
+    {
+        "path" : "/home/angelo/Scrivania/AshDB.sqlite"
+    }
+}
