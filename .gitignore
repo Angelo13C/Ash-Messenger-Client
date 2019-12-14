@@ -1,0 +1,4 @@
+.qmake.stash
+Makefile
+/build/*
+Ash_Messenger_Client.pro.user
