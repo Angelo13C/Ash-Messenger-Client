@@ -20,8 +20,8 @@ QString Config::readValue(QString rawKey)
     QJsonObject valuesObject = _configDoc.object();
 
     //Go through all the objects with that key
-    for(int i = 0; i < separatedKeys.length() - 1; i++) {
-        valuesObject = valuesObject[separatedKeys.at(i)].toObject();
+    for(QString key : separatedKeys) {
+        valuesObject = valuesObject[key].toObject();
     }
 
     //Get the value of the last part of the raw key

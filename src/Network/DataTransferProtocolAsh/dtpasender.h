@@ -1,8 +1,6 @@
 #pragma once
 
-#include <QCoreApplication>
 #include <QObject>
-#include <QThread>
 
 #include <QSslSocket>
 
@@ -10,7 +8,6 @@
 
 #include "dtpa.h"
 #include "dtparequest.h"
-#include "dtpareceivermanager.h"
 
 class DTPASender : public QObject
 {
@@ -38,11 +35,8 @@ private:
     QMap<int, funcRequestAnswer> _funcNeedAnswerRequest;
     QMap<int, funcRequestEnd> _funcEndRequest;
 
-public slots:
-    void sendRequestSignal(DTPARequest *request);
-
 private:
-    QList<DTPARequest*> _requestQueue;
+    QList<DTPARequest *> _requestQueue;
     bool _requestIDs[10000] = {false};
 
     QSslSocket *_socket;

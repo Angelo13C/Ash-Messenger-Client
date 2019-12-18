@@ -45,8 +45,10 @@ QVector<QStringList> Database::execute(QString queryString)
     //Get the rows of the result of the query
     QVector<QStringList> results;
 
+    //Append all the rows
     for(int r = 0; query.next(); r++)
     {
+        //Append all the values of a row
         QStringList row;
         for(int i = 0; i < query.record().count(); i++)
         {

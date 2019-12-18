@@ -54,9 +54,9 @@ DTPARequest::DTPARequest(DTPARequest::Command command, QStringList stringForms, 
     //Create the forms from the string list
     QList<DTPAForm> forms = QList<DTPAForm>();
 
-    for(int i = 0; i < stringForms.length(); i++)
+    for(QString &form : stringForms)
     {
-        forms.append(DTPAForm(stringForms.at(i)));
+        forms.append(DTPAForm(form));
     }
 
     setup(command, forms, priority, id);
@@ -184,7 +184,7 @@ DTPARequest::Priority DTPARequest::getPriority() const
 //Merge 2 requests
 DTPARequest DTPARequest::operator +(const DTPARequest &obj)
 {
-    this->addForms(obj._forms, _forms.isEmpty() ? true : obj._forms.last().isComplete());
+    addForms(obj._forms, _forms.isEmpty() ? true : obj._forms.last().isComplete());
     return *this;
 }
 

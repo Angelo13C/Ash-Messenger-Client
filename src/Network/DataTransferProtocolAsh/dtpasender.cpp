@@ -4,18 +4,6 @@
 DTPASender::DTPASender(QObject *parent)
 {
     Q_UNUSED(parent)
-
-    /*DTPAReceiverManager::getInstance()->signCommandFunction
-            (DTPARequest::Command::GET_USER_INFO_RESULT, [&](DTPARequest *req, bool *deleteReq)
-    {
-        if(req->isComplete())
-        {
-            *deleteReq = true;
-
-            int reqID = req->getForms().first().getValue().toInt();
-            _requestIDs[reqID] = false;
-        }
-    });*/
 }
 
 /* SINGLETON */
@@ -34,7 +22,10 @@ void DTPASender::setSocket(QSslSocket *socket)
 //Add a request to the queue of request to send
 void DTPASender::sendRequest(DTPARequest *request, funcRequestAnswer funcAnswer, funcRequestEnd funcEnd)
 {
-    emit sendRequestSignal(request);
+    request->setID(getValidRequestID());
+
+    //On the heap because there are bugs when retrieving it from getHighestPriorityRequest
+    _requestQueue.append(new DTPARequest(*request));
 
     //Add to the map of the functions to call
     if(funcAnswer != nullptr)
@@ -42,18 +33,15 @@ void DTPASender::sendRequest(DTPARequest *request, funcRequestAnswer funcAnswer,
     //Add to the map of the functions to call
     if(funcEnd != nullptr)
         _funcEndRequest.insert(request->getID(), funcEnd);
+
+    //Send another packet if needed
+    if(!DTPASender::getInstance()->queueEmpty())
+        DTPASender::getInstance()->sendPacket();
 }
 
 bool DTPASender::queueEmpty()
 {
     return _requestQueue.isEmpty();
-}
-
-//Add a request to the queue of request to send
-void DTPASender::sendRequestSignal(DTPARequest *request)
-{
-    request->setID(getValidRequestID());
-    _requestQueue.append(new DTPARequest(*request));
 }
 
 //Get the right packet from the queue of requests
@@ -151,6 +139,10 @@ void DTPASender::sendPacket()
 
     //Send packet with socket
     _socket->write(packet.toUtf8());
+
+    //Send another packet if needed
+    if(!DTPASender::getInstance()->queueEmpty())
+        DTPASender::getInstance()->sendPacket();
 }
 
 //Get the highest priority request

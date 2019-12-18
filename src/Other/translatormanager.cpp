@@ -1,7 +1,6 @@
 #include "translatormanager.h"
 
 #include <QDebug>
-/* SETUP */
 
 TranslatorManager::TranslatorManager(QObject *parent) :
     QObject(parent)
@@ -9,6 +8,8 @@ TranslatorManager::TranslatorManager(QObject *parent) :
 
 
 }
+
+/* SETUP */
 
 void TranslatorManager::initialize(QQmlApplicationEngine *qmlEngine)
 {

@@ -37,7 +37,7 @@ void DTPAReceiverManager::callRequestCommand(DTPARequest *request, bool *deleteR
             f(request, deleteRequest);
         }
     }
-    //If no function with that command is been found, show error
+    //If no function with that command is been found
     if(foundFunctionsCount == 0)
     {
         //Delete the request if there's no function listening to it

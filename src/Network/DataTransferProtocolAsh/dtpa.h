@@ -2,7 +2,6 @@
 
 #include <functional>
 
-#include <QVector>
 #include <QList>
 #include <QString>
 #include <QStringList>

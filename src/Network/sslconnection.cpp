@@ -1,8 +1,13 @@
 #include "sslconnection.h"
 
+#include <QCoreApplication>
+
 SslConnection::SslConnection(QObject *parent) : QObject(parent)
 {
-
+    //Get values from JSON config
+    _SERVER_ADDRESS = Config::readValue("network/server_address");
+    _SERVER_PORT = Config::readValue("network/server_port").toUShort();
+    _MS_RECONNECT_SOCKET = Config::readValue("network/ms_reconnect_socket").toUShort();
 }
 
 void SslConnection::initialize(QThread *thread)
@@ -14,53 +19,44 @@ void SslConnection::initialize(QThread *thread)
 void SslConnection::runThread()
 {
     connectToServer();
-    DTPASender::getInstance()->setSocket(_socket);
 
-    //Send packet if needed or wait 1 ms
-    while(true)
-    {
-        if(DTPASender::getInstance()->queueEmpty())
-            QThread::msleep(1);
-        else
-            DTPASender::getInstance()->sendPacket();
-
-        QCoreApplication::processEvents();
-    }
+    //Run the event loop
+    QEventLoop loop;
+    connect(this->thread(), &QThread::finished, &loop, &QEventLoop::quit);
+    loop.exec();
 }
 
 //Delete the socket from the heap at the end
 SslConnection::~SslConnection()
 {
-    delete _socket;
+    _socket->deleteLater();
 }
 
+//Try to connect to the server
 void SslConnection::connectToServer()
 {
     _socket = new QSslSocket(this);
+    DTPASender::getInstance()->setSocket(_socket);
+
     _socket->setProtocol(QSsl::TlsV1_0);
 
     connect(_socket, &QSslSocket::encrypted, this, &SslConnection::onReady);
     connect(_socket, &QSslSocket::disconnected, this, &SslConnection::onDisconnect);
     connect(_socket, SIGNAL(sslErrors(QList<QSslError>)), this, SLOT(onError(QList<QSslError>)));
 
-    //Get values from JSON config
-    const QString SERVER_ADDRESS = Config::readValue("networking/server_address");
-    const quint16 SERVER_PORT = Config::readValue("networking/server_port").toUShort();
-    const quint16 MS_RECONNECT_SOCKET = Config::readValue("networking/ms_reconnect_socket").toUShort();
-
-    //Try to connect to the server
-    _socket->connectToHostEncrypted(SERVER_ADDRESS, SERVER_PORT);
-
-    _socket->waitForEncrypted();
-
     //If the socket can't connect the first time, automatically try to connect every MS_RECONNECT_SOCKET milliseconds
-    while(_socket->state()!=QAbstractSocket::ConnectedState)
+    while(true)
     {
-        QThread::msleep(MS_RECONNECT_SOCKET);
+        //Try to connect to the server
+        _socket->connectToHostEncrypted(_SERVER_ADDRESS, _SERVER_PORT);
 
-        _socket->connectToHostEncrypted(SERVER_ADDRESS, SERVER_PORT);
+        _socket->waitForConnected(_MS_RECONNECT_SOCKET);
 
-        _socket->waitForConnected(MS_RECONNECT_SOCKET);
+        //Break if the connection is succesfull, otherwise wait
+        if(_socket->state() == QAbstractSocket::ConnectedState)
+            break;
+        else
+            QThread::msleep(_MS_RECONNECT_SOCKET);
     }
 
     _socket->startClientEncryption();
@@ -71,22 +67,44 @@ void SslConnection::connectToServer()
     }
 }
 
+//When the socket is connected succesfully
 void SslConnection::onReady()
 {
-    connect(_socket, SIGNAL(readyRead()), this, SLOT(read()));
+    connect(_socket, &QSslSocket::readyRead, this, &SslConnection::read);
 }
 
+//On socket error
 void SslConnection::onError(QList<QSslError> errors)
 {
     _socket->ignoreSslErrors(errors);
     //qDebug() << errors;           //If you want to see errors, uncomment this
 }
 
+//On disconnect, fre the heap and try to reconnect
 void SslConnection::onDisconnect()
 {
+    _socket->deleteLater();
     connectToServer();
 }
 
+//Read a packet from the socket and add the request to DTPAReceiver cached packets
+void SslConnection::read()
+{
+    QString packet = readSocket();
+
+    //If a packet is completely available
+    if(packet != "")
+    {
+        QList<DTPARequest> requests = DTPAReceiver::packetToRequests(packet);
+
+        for(DTPARequest &request : requests)
+        {
+            DTPAReceiver::addToCachedRequests(request);
+        }
+    }
+}
+
+//Read from the socket solving bugs
 QString SslConnection::readSocket()
 {
     /*This is for solving the bug that the client reads more than it should from the socket
@@ -94,13 +112,12 @@ QString SslConnection::readSocket()
       the max size (4096)*/
 
     _cachedBytePacket += _socket->read(DTPA::REQUEST_MAX_SIZE - _cachedBytePacket.length());
-    std::string temp = _cachedBytePacket.toStdString();
 
-    QString packet = QString::fromStdString(temp);
+    QString packet = _cachedBytePacket;
     int n = packet.length() > DTPA::REQUEST_MAX_SIZE ? DTPA::REQUEST_MAX_SIZE : packet.length();
 
     //Check if the last ascii char of the packet is a bugged one (it's only the first byte of a pair of an extended ascii char)
-    while(packet[n - 1] == 65533)
+    while(packet.at(n - 1) == 65533)
     {
         packet.remove(n - 1, 1);
         n--;
@@ -147,21 +164,4 @@ QString SslConnection::readSocket()
     }
 
     return packet;
-}
-
-void SslConnection::read()
-{
-    QString packet = readSocket();
-
-    //If a packet is completely available
-    if(packet != "")
-    {
-        QList<DTPARequest> requests = DTPAReceiver::packetToRequests(packet);
-
-        for(int i = 0; i < requests.length(); i++)
-        {
-            DTPARequest request = DTPARequest(requests.at(i));
-            DTPAReceiver::addToCachedRequests(request);
-        }
-    }
 }

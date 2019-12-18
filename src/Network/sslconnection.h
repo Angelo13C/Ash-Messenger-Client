@@ -40,6 +40,9 @@ private:
     QString _cachedPacket = "";
     QByteArray _cachedBytePacket = "";
 
+    QString _SERVER_ADDRESS;
+    quint16 _SERVER_PORT, _MS_RECONNECT_SOCKET;
+
     QString readSocket();
 };
 

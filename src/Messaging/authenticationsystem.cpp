@@ -31,7 +31,7 @@ void AuthenticationSystem::loginEmail(QString email, QString password, QObject *
 {
     _qmlAreaLogin = qmlAreaLogin;
 
-    DTPARequest request(DTPARequest::Command::LOGIN_USER_EMAIL, QStringList(), DTPARequest::Priority::HIGH);
+    DTPARequest request(DTPARequest::Command::LOGIN_USER_EMAIL, DTPARequest::Priority::HIGH);
 
     request.addNewForm(&email);
     request.addNewForm(&password);
@@ -44,7 +44,7 @@ void AuthenticationSystem::registerEmail(QString email, QString password, QObjec
 {
     _qmlAreaRegister = qmlAreaRegister;
 
-    DTPARequest request(DTPARequest::Command::REGISTER_USER_EMAIL, QStringList(), DTPARequest::Priority::HIGH);
+    DTPARequest request(DTPARequest::Command::REGISTER_USER_EMAIL, DTPARequest::Priority::HIGH);
 
     request.addNewForm(&email);
     request.addNewForm(&password);
@@ -70,6 +70,7 @@ void AuthenticationSystem::loginEmailResult(DTPARequest *request, bool *deleteRe
     }
 }
 
+//The result of the register with email
 void AuthenticationSystem::registerEmailResult(DTPARequest *request, bool *deleteRequest)
 {
     if(request->isComplete())

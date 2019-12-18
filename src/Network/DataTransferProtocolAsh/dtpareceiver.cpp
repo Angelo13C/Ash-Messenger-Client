@@ -4,6 +4,7 @@
 void DTPAReceiver::addToCachedRequests(DTPARequest request)
 {
     bool alreadyCachedRequest = false;
+
     int i = 0;
     for(; i < _cachedRequests.length(); i++)
     {
@@ -51,11 +52,12 @@ QList<DTPARequest> DTPAReceiver::packetToRequests(QString packet)
     //Get the fragments of the packet
     QStringList fragments = DTPA::packetToFragments(packet);
 
-    foreach (QString fragment, fragments) {
+    for(QString &fragment : fragments)
+    {
         requests.append(fragmentToRequest(fragment));
     }
 
-    return  requests;
+    return requests;
 }
 
 //Decode a fragment and get the request
@@ -63,7 +65,7 @@ DTPARequest DTPAReceiver::fragmentToRequest(QString fragment)
 {
     int16_t fragmentID;
     int16_t answerToID = -1;
-    bool lastAnswer;
+    bool lastAnswer = false;
     DTPARequest::Command fragmentCommand;
     QList<DTPAForm> forms;
 
@@ -99,14 +101,13 @@ DTPARequest DTPAReceiver::fragmentToRequest(QString fragment)
     QStringList stringFormsList = DTPA::separateForms(encodedForms, &isLastFormCompleted);
 
     //Byte stuff every form in the list
-    for(int i = 0; i < stringFormsList.length(); i++)
-        DTPA::byteStuff(&stringFormsList[i], true);
-
-    //Add the splitted forms to the forms list
-    for(int i = 0; i < stringFormsList.length(); i++)
+    for(QString &stringForm : stringFormsList)
     {
-        bool isFormComplete = i < stringFormsList.length() - 1 ? true : isLastFormCompleted;
-        DTPAForm form(stringFormsList.at(i), isFormComplete);
+        DTPA::byteStuff(&stringForm, true);
+
+        //Add the splitted forms to the forms list
+        bool isFormComplete = stringFormsList.last() == stringForm ? true : isLastFormCompleted;
+        DTPAForm form(stringForm, isFormComplete);
 
         forms.append(form);
     }

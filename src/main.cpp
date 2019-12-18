@@ -70,7 +70,13 @@ int main(int argc, char *argv[])
 
     //Start networking sender thread
     QThread *networkThread = new QThread();
-    app.connect(&app, &QApplication::lastWindowClosed, networkThread, &QThread::quit);
+    networkThread->setObjectName("Networking Thread");
+
+    //Free the heap when the app is closed
+    app.connect(&app, &QApplication::lastWindowClosed, networkThread, [&](){
+        networkThread->exit(0);
+        networkThread->deleteLater();
+    });
 
     //Connect to the server (must be a pointer for a problem of multi-threading)
     SslConnection *_connection = new SslConnection();
@@ -78,6 +84,9 @@ int main(int argc, char *argv[])
     _connection->initialize(networkThread);
     _connection->moveToThread(networkThread);
     networkThread->start();
+
+    //Free the heap when the app is closed
+    app.connect(&app, &QApplication::lastWindowClosed, _connection, [&](){delete _connection;});
 
     //Initialize the local database
     Database::initialize();
