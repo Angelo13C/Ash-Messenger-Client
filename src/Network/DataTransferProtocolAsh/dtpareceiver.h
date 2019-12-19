@@ -1,13 +1,6 @@
 #pragma once
 
-#include <QVector>
-#include <QList>
-
-#include "dtpa.h"
-#include "dtpasender.h"
 #include "dtparequest.h"
-#include "dtpaform.h"
-#include "dtpareceivermanager.h"
 
 namespace DTPAReceiver
 {

@@ -1,5 +1,7 @@
 #include "advertisepanel.h"
 
+#include <QDesktopServices>
+
 AdvertisePanel::AdvertisePanel(QObject *parent) : QObject(parent)
 {
 

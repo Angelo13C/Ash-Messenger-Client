@@ -1,5 +1,10 @@
 #include "dtpareceiver.h"
 
+#include "dtpa.h"
+#include "dtpasender.h"
+#include "dtpaform.h"
+#include "dtpareceivermanager.h"
+
 //Add a request to the vector of cached requests (requests that aren't ended but are started)
 void DTPAReceiver::addToCachedRequests(DTPARequest request)
 {

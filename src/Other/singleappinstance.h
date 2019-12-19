@@ -1,7 +1,5 @@
 #pragma once
-#include <QObject>
 #include <QLocalServer>
-#include <QLocalSocket>
 
 class SingleAppInstance : public QObject
 {

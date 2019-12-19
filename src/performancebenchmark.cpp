@@ -8,6 +8,6 @@ PerformanceBenchmark::PerformanceBenchmark(QString name):
 
 PerformanceBenchmark::~PerformanceBenchmark()
 {
-    float nSecsElapsed = static_cast<float>(_timer.nsecsElapsed()) / nSecsToMs;
+    float nSecsElapsed = _timer.nsecsElapsed() / nSecsToMs;
     qDebug() << "Benchmark " << _name << ": " << nSecsElapsed << " ms";
 }

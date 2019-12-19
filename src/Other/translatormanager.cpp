@@ -1,6 +1,9 @@
 #include "translatormanager.h"
 
-#include <QDebug>
+#include <QtGui>
+#include <QLocale>
+
+#include "usersettings.h"
 
 TranslatorManager::TranslatorManager(QObject *parent) :
     QObject(parent)

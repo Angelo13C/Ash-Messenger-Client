@@ -1,6 +1,5 @@
 #pragma once
 #include <QSettings>
-#include <QString>
 
 namespace UserSettings
 {

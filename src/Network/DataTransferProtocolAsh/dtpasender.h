@@ -1,12 +1,9 @@
 #pragma once
 
-#include <QObject>
-
 #include <QSslSocket>
 
 #include <functional>
 
-#include "dtpa.h"
 #include "dtparequest.h"
 
 class DTPASender : public QObject

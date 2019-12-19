@@ -1,5 +1,10 @@
 #include "authenticationsystem.h"
 
+#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
+#include "src/Network/DataTransferProtocolAsh/dtpareceivermanager.h"
+
+#include "userinfo.h"
+
 AuthenticationSystem::AuthenticationSystem(QObject *parent) : QObject(parent)
 {
     DTPAReceiverManager::getInstance()->signCommandFunction(DTPARequest::Command::LOGIN_USER_EMAIL_RESULT, loginEmailResult);

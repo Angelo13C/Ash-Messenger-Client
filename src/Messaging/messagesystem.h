@@ -1,11 +1,5 @@
 #pragma once
 
-#include <QObject>
-#include <QQmlEngine>
-
-#include "src/Network/DataTransferProtocolAsh/dtparequest.h"
-#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
-
 class MessageSystem : public QObject
 {
     Q_OBJECT

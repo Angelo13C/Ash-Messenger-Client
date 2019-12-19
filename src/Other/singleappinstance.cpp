@@ -1,5 +1,7 @@
 #include "singleappinstance.h"
 
+#include <QLocalSocket>
+
 SingleAppInstance::SingleAppInstance(QObject *parent) : QObject(parent)
 {    
     connect(&_server, &QLocalServer::newConnection, this, &SingleAppInstance::newInstance);

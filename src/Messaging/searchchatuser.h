@@ -1,10 +1,6 @@
 #pragma once
 
-#include <QQmlEngine>
-#include <QObject>
-
-#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
-#include "userinfo.h"
+#include "src/Network/DataTransferProtocolAsh/dtparequest.h"
 
 class SearchChatUser : public QObject
 {

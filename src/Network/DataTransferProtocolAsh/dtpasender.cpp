@@ -1,5 +1,7 @@
 #include "dtpasender.h"
 
+#include "dtpa.h"
+
 //Initialize the sender
 DTPASender::DTPASender(QObject *parent)
 {

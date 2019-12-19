@@ -1,5 +1,12 @@
 #include "chatsystem.h"
 
+#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
+#include "src/Network/DataTransferProtocolAsh/dtpareceivermanager.h"
+
+#include "src/Database/database.h"
+
+#include "userinfo.h"
+
 ChatSystem::ChatSystem(QObject *parent) : QObject(parent)
 {
     UserInfo::initialize();

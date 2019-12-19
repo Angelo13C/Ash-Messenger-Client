@@ -1,13 +1,6 @@
 #pragma once
 
-#include <QObject>
-#include <QQmlEngine>
-
 #include "src/Network/DataTransferProtocolAsh/dtparequest.h"
-#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
-#include "src/Network/DataTransferProtocolAsh/dtpareceivermanager.h"
-
-#include "userinfo.h"
 
 class AuthenticationSystem : public QObject
 {

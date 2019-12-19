@@ -1,5 +1,4 @@
 #pragma once
-#include <QDebug>
 #include <QElapsedTimer>
 
 class PerformanceBenchmark
@@ -11,7 +10,7 @@ public:
 private:
     QString _name;
 
-    static constexpr int nSecsToMs = 1000000;
+    static constexpr float nSecsToMs = 1000000;
     QElapsedTimer _timer;
 };
 

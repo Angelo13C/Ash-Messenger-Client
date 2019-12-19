@@ -1,17 +1,6 @@
 #pragma once
 
-#include <QObject>
-#include <QThread>
-
 #include <QSslSocket>
-#include <QList>
-#include <QSslError>
-#include <QHostAddress>
-#include <QSsl>
-
-#include "DataTransferProtocolAsh/dtpareceiver.h"
-
-#include "src/Other/config.h"
 
 class SslConnection : public QObject
 {

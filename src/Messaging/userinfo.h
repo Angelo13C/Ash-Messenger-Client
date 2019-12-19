@@ -1,10 +1,5 @@
 #pragma once
 
-#include "src/Network/DataTransferProtocolAsh/dtpareceivermanager.h"
-#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
-
-#include "src/Database/database.h"
-
 namespace UserInfo
 {
 void initialize();

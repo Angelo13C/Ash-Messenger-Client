@@ -1,5 +1,8 @@
 #include "messagesystem.h"
 
+#include "src/Network/DataTransferProtocolAsh/dtparequest.h"
+#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
+
 MessageSystem::MessageSystem(QObject *parent) : QObject(parent)
 {
 

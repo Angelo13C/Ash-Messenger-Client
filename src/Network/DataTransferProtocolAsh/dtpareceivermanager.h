@@ -1,7 +1,5 @@
 #pragma once
 
-#include <QDebug>
-
 #include <functional>
 
 #include "dtpa.h"

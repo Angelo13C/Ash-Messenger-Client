@@ -1,5 +1,10 @@
 #include "searchchatuser.h"
 
+#include "userinfo.h"
+
+#include "src/Network/DataTransferProtocolAsh/dtpasender.h"
+#include "src/Network/DataTransferProtocolAsh/dtpareceivermanager.h"
+
 SearchChatUser::SearchChatUser(QObject *parent) : QObject(parent)
 {
     DTPAReceiverManager::getInstance()->signCommandFunction
@@ -31,7 +36,7 @@ void SearchChatUser::setAreaObect(QObject *areaObject)
 {
     _qmlAreaSearch = areaObject;
 }
-#include <QDebug>   //DELETe
+
 QVector<int> SearchChatUser::_searchedUsersID;
 void SearchChatUser::searchUsername(QString username)
 {

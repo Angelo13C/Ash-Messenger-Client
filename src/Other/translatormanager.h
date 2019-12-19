@@ -1,14 +1,6 @@
 #pragma once
 
-#include <QObject>
 #include <QTranslator>
-#include <QtGui>
-#include <QQmlApplicationEngine>
-#include <QLocale>
-#include <QQmlContext>
-#include <QQmlEngine>
-
-#include "usersettings.h"
 
 class TranslatorManager : public QObject
 {

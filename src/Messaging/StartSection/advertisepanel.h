@@ -1,9 +1,5 @@
 #pragma once
 
-#include <QQmlEngine>
-#include <QObject>
-#include <QDesktopServices>
-
 class AdvertisePanel : public QObject
 {
     Q_OBJECT

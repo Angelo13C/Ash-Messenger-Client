@@ -1,11 +1,6 @@
-#include <QGuiApplication>
-#include <QThreadPool>
-
 #include <QQuickStyle>
-
 #include <QApplication>
-#include <QWidget>
-#include <QMainWindow>
+#include <QWindow>
 
 #include "Other/config.h"
 #include "Other/translatormanager.h"
@@ -22,7 +17,7 @@
 #include "src/Messaging/searchchatuser.h"
 #include "src/Messaging/messagesystem.h"
 
-//#define SINGLETON_APPLICATION     //Uncomment to remove the single instance application functionality
+//#define SINGLETON_APPLICATION     //Comment to remove the single instance application functionality
 
 int main(int argc, char *argv[])
 {

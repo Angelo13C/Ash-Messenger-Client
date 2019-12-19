@@ -1,6 +1,16 @@
 #include "sslconnection.h"
 
-#include <QCoreApplication>
+#include <QEventLoop>
+#include <QSslError>
+#include <QSsl>
+#include <QHostAddress>
+
+#include "DataTransferProtocolAsh/dtpareceiver.h"
+#include "DataTransferProtocolAsh/dtpasender.h"
+
+#include "src/Other/config.h"
+
+#include "DataTransferProtocolAsh/dtpa.h"
 
 SslConnection::SslConnection(QObject *parent) : QObject(parent)
 {
@@ -52,6 +62,7 @@ void SslConnection::connectToServer()
 
         _socket->waitForConnected(_MS_RECONNECT_SOCKET);
 
+        qDebug() << "Socket state: " << _socket->state();
         //Break if the connection is succesfull, otherwise wait
         if(_socket->state() == QAbstractSocket::ConnectedState)
             break;
