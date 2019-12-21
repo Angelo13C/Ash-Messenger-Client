@@ -10,6 +10,7 @@ import "./MessageSection"
 
 ApplicationWindow {
     id: _root
+    objectName: "main"
 
     visible: true
 
@@ -62,5 +63,5 @@ ApplicationWindow {
         }
 
     }
-
+    property QtObject utilObj: Utilities
 }

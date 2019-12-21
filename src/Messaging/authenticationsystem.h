@@ -2,6 +2,8 @@
 
 #include "src/Network/DataTransferProtocolAsh/dtparequest.h"
 
+#include "src/performancebenchmark.h"   //DELETE
+
 class AuthenticationSystem : public QObject
 {
     Q_OBJECT

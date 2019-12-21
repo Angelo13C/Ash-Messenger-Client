@@ -1,10 +1,14 @@
-QT += quick
+QT += quick qml
 QT += svg
 QT += sql
 QT += network
 QT += quickcontrols2
+
 CONFIG += c++11
 CONFIG += precompile_header
+
+TEMPLATE = app
+QMAKE_LFLAGS += -no-pie # Build executable instead of shared library on Ubuntu
 
 # Use Precompiled headers (PCH)
 PRECOMPILED_HEADER = src/pch.h
@@ -22,7 +26,6 @@ profile:   DESTDIR = build/profile
 OBJECTS_DIR = $$DESTDIR/.obj
 MOC_DIR = $$DESTDIR/.moc
 RCC_DIR = $$DESTDIR/.qrc
-UI_DIR = $$DESTDIR/.ui
 
 # You can also make your code fail to compile if it uses deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -79,7 +82,7 @@ DISTFILES += \
     resources/Assets/Images/Padlock.svg \
     resources/Assets/Images/StartSection/GitHub.png \
     resources/Assets/Images/StartSection/Reddit.png \
-    resources/Assets/Images/StartSection/Right Image Advertise Panel.svg \
+    resources/Assets/Images/StartSection/Right_Image_Advertise_Panel.svg \
     resources/Assets/Images/StartSection/Twitter.png \
     resources/Assets/Images/User.svg \
     resources/Assets/Images/test.jpg \
@@ -132,3 +135,4 @@ HEADERS += \
     src/Other/translatormanager.h \
     src/Other/usersettings.h \
     src/performancebenchmark.h
+

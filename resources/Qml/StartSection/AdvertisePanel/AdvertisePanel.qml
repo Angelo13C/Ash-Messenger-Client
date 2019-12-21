@@ -122,7 +122,7 @@ Item {
         onExited: opacity = 0.4
 
         Image {
-            source: "qrc:/Assets/Assets/Images/StartSection/Right Image Advertise Panel.svg"
+            source: "qrc:/Assets/Assets/Images/StartSection/Right_Image_Advertise_Panel.svg"
 
             anchors.fill: parent
         }

@@ -62,7 +62,6 @@ void SslConnection::connectToServer()
 
         _socket->waitForConnected(_MS_RECONNECT_SOCKET);
 
-        qDebug() << "Socket state: " << _socket->state();
         //Break if the connection is succesfull, otherwise wait
         if(_socket->state() == QAbstractSocket::ConnectedState)
             break;

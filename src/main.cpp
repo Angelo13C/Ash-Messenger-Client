@@ -1,6 +1,8 @@
 #include <QQuickStyle>
 #include <QApplication>
 #include <QWindow>
+#include <QScreen>
+#include <QQmlComponent>  //IDK
 
 #include "Other/config.h"
 #include "Other/translatormanager.h"
@@ -94,6 +96,12 @@ int main(int argc, char *argv[])
     qmlRegisterSingletonType<MessageSystem>("MessageSystem", 1, 0, "MessageSystem", MessageSystem::qmlInstance);
 
     engine.load(url);       //Load qml objects
+
+    QObject *rootObject = engine.rootObjects().first();
+    QObject *utilitiesObj = qvariant_cast<QObject *>(rootObject->property("utilObj"));
+
+    QMetaObject::invokeMethod(utilitiesObj, "setScreen"
+             , Q_ARG(QVariant, QGuiApplication::primaryScreen()->physicalSize()));
 
     return app.exec();
 }

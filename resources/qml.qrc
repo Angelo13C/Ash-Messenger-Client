@@ -23,6 +23,8 @@
         <file>Qml/MessageSection/AreaChat/MessageBar.qml</file>
         <file>Qml/IconButton.qml</file>
         <file>Qml/StartSection/AdvertisePanel/AdvertisePanel.qml</file>
+        <file>Qml/Utilities.qml</file>
+        <file>Qml/qmldir</file>
     </qresource>
     <qresource prefix="/Assets">
         <file>Assets/Images/Eye_ShowPassword.svg</file>
@@ -39,7 +41,7 @@
         <file>Assets/Images/StartSection/GitHub.png</file>
         <file>Assets/Images/StartSection/Reddit.png</file>
         <file>Assets/Images/StartSection/Twitter.png</file>
-        <file>Assets/Images/StartSection/Right Image Advertise Panel.svg</file>
+        <file>Assets/Images/StartSection/Right_Image_Advertise_Panel.svg</file>
     </qresource>
     <qresource prefix="/Languages">
         <file>Languages/lang_it.ts</file>

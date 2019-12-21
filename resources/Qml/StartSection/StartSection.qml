@@ -9,6 +9,8 @@ import "./AreaLogin"
 import "./AreaRegister"
 import "./AdvertisePanel"
 
+import "../"
+
 Item {
     id: _root
 
@@ -75,6 +77,8 @@ Item {
 
         AdvertisePanel
         {
+            visible: Utilities._screenWidth > 200
+
             Layout.fillHeight: true
             Layout.fillWidth: true
         }

@@ -4,8 +4,11 @@
 class PerformanceBenchmark
 {
 public:
-    PerformanceBenchmark(QString name);
+    PerformanceBenchmark(QString name, bool start = true);
     ~PerformanceBenchmark();
+
+    void start();
+    void stop();
 
 private:
     QString _name;
